@@ -1,0 +1,4 @@
+ALTER TABLE movies
+ALTER COLUMN id
+SET DATA TYPE UUID
+USING id::uuid;

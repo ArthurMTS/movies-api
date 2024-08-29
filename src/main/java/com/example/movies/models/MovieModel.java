@@ -3,6 +3,7 @@ package com.example.movies.models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.UUID;
@@ -12,6 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class MovieModel {
     @Id @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
