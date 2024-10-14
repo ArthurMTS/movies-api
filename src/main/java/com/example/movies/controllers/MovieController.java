@@ -5,11 +5,14 @@ import com.example.movies.models.MovieModel;
 import com.example.movies.services.MovieService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -25,8 +28,14 @@ public class MovieController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MovieModel>> getAllMovies() {
-        var movies = service.getAllMovies();
+    public ResponseEntity<Page<MovieModel>> getAllMovies(
+            @PageableDefault(
+                    size = 5,
+                    sort = "id",
+                    direction = Sort.Direction.ASC
+            ) Pageable page
+    ) {
+        var movies = service.getAllMovies(page);
         return ResponseEntity.status(HttpStatus.OK).body(movies);
     }
 

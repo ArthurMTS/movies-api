@@ -6,9 +6,10 @@ import com.example.movies.repositories.MovieRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -17,8 +18,8 @@ public class MovieService {
     @Autowired
     MovieRepository repository;
 
-    public List<MovieModel> getAllMovies() {
-        return repository.findAll();
+    public Page<MovieModel> getAllMovies(Pageable page) {
+        return repository.findAll(page);
     }
 
     public MovieModel getMovie(UUID id) {
